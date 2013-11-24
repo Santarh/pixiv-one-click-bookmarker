@@ -21,19 +21,28 @@ var form_data =
 	restrict: 0,
 }
 var star = document.createElement("a");
-star.innerText = "★";
+star.innerText = "☆";
 star.className = "_button";
 star.onclick = function()
 {
 	var xreq = new XMLHttpRequest();
-
 	xreq.open("POST", "bookmark_add.php");
+	xreq.onreadystatechange = function()
+	{
+		if (xreq.readyState==4 && xreq.status==200)
+		{
+			star.innerText = "★ 多分ブックマーク済み";
+			star.onclick = null;
+		}
+	}
 	xreq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xreq.send(EncodeForm(form_data));
 }
 
 var bookmarker = document.querySelector("a.add-bookmark");
-bookmarker.innerText = "option";
-
-var container = document.querySelector("div.bookmark-container");
-container.insertBefore(star);
+if (bookmarker)
+{
+	bookmarker.innerText = "option";
+	var container = document.querySelector("div.bookmark-container");
+	container.insertBefore(star);
+}
