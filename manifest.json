@@ -1,0 +1,12 @@
+{
+	"manifest_version": 2,
+	"name":			"Pixiv One-click Bookmarker",
+	"version":		"1.0",
+	"description":	"Add One-click Bookmark button on Pixiv",
+	"content_scripts": [
+		{
+			"matches":["http://www.pixiv.net/member_illust.php*"],
+			"js":["js/add_bookmarker.js"]
+		}
+	]
+}
